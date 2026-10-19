@@ -1,0 +1,61 @@
+# LOCAL testing only: builds both images from source and runs them with PostgreSQL.
+# docker compose up --build
+# Website: http://localhost:3000
+# CMS admin: http://localhost:1337/admin
+
+name: plateworks-local
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: plateworks
+      POSTGRES_USER: plateworks
+      POSTGRES_PASSWORD: plateworks
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U plateworks -d plateworks"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  backend:
+    build: ./backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: "5432"
+      DATABASE_NAME: plateworks
+      DATABASE_USERNAME: plateworks
+      DATABASE_PASSWORD: plateworks
+      APP_KEYS: local-key-1,local-key-2,local-key-3,local-key-4
+      API_TOKEN_SALT: local-api-token-salt
+      ADMIN_JWT_SECRET: local-admin-jwt-secret
+      TRANSFER_TOKEN_SALT: local-transfer-salt
+      JWT_SECRET: local-jwt-secret
+      PUBLIC_URL: http://localhost:1337
+      CORS_ORIGINS: http://localhost:3000
+      SEED_DATA: "true"
+    ports:
+      - "1337:1337"
+    volumes:
+      - uploads:/opt/app/public/uploads
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      STRAPI_INTERNAL_URL: http://backend:1337
+      STRAPI_PUBLIC_URL: http://localhost:1337
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:
+  uploads:

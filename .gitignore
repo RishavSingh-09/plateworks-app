@@ -1,0 +1,22 @@
+# secrets
+.env
+.env.local
+*.pem
+ 
+# node
+node_modules/
+.next/
+ 
+# strapi
+backend/build/
+backend/.cache/
+backend/.tmp/
+backend/dist/
+backend/.strapi/
+backend/public/uploads/*
+!backend/public/uploads/.gitkeep
+ 
+# os / editor
+.DS_Store
+.vscode/
+

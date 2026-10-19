@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "plans",
+  "info": {
+    "singularName": "plan",
+    "pluralName": "plans",
+    "displayName": "Membership plan",
+    "description": "Gym membership tiers. plateKg maps to the barbell plate colour used on the site."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "plateKg": {
+      "type": "integer",
+      "required": true,
+      "min": 5,
+      "max": 25
+    },
+    "priceMonthly": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "currency": {
+      "type": "string",
+      "default": "INR"
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "features": {
+      "type": "json"
+    },
+    "highlighted": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

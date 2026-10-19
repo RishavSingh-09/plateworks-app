@@ -1,0 +1,32 @@
+{
+  "name": "plateworks-cms",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Plateworks gym - headless CMS (Strapi 4)",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@strapi/plugin-i18n": "4.25.11",
+    "@strapi/plugin-users-permissions": "4.25.11",
+    "@strapi/strapi": "4.25.11",
+    "better-sqlite3": "9.6.0",
+    "pg": "8.11.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "5.3.4",
+    "styled-components": "5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=20.x.x",
+    "npm": ">=6.0.0"
+  },
+  "strapi": {
+    "uuid": false
+  },
+  "license": "MIT"
+}

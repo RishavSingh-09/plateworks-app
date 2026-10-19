@@ -1,0 +1,6 @@
+# keep Linux line endings so shell scripts work on the servers
+*.sh text eol=lf
+Jenkinsfile text eol=lf
+Dockerfile text eol=lf
+*.yml text eol=lf
+*.conf text eol=lf
